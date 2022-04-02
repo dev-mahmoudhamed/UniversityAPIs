@@ -1,4 +1,4 @@
-namespace wepAPI
+namespace UniversityAPI
 {
     public class WeatherForecast
     {

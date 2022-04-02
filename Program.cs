@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using wepAPI.Data;
+using System;
+using UniversityAPI.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

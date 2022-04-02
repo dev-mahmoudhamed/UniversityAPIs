@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using wepAPI.Entities;
+using UniversityAPI.Entities;
 
-namespace wepAPI.Data
+namespace UniversityAPI.Data
 {
     public class StudentsContext : DbContext
     {

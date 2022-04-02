@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using UniversityAPI;
 
-namespace wepAPI.Controllers
+namespace UniversityAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

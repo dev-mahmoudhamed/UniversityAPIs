@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace wepAPI.Entities
+namespace UniversityAPI.Entities
 {
     public class Course
     {
