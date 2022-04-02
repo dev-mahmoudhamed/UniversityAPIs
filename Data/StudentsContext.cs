@@ -1,0 +1,15 @@
+﻿using Microsoft.EntityFrameworkCore;
+using wepAPI.Entities;
+
+namespace wepAPI.Data
+{
+    public class StudentsContext : DbContext
+    {
+        public StudentsContext(DbContextOptions<StudentsContext> options) : base(options)
+        {
+        }
+
+        // Include properties of type DbSet<T> representing tables in the database.
+        public DbSet<Student> Students { get; set; }
+    }
+}
