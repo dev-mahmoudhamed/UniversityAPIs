@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using wepAPI.Data;
+using UniversityAPI.Data;
 
 namespace wepAPI.Controllers
 {

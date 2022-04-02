@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityAPI.Data;
 
 #nullable disable
 
-namespace wepAPI.Migrations
+namespace UniversityAPI.Migrations
 {
     [DbContext(typeof(StudentsContext))]
-    [Migration("20220402021751_ModifyStudentID")]
-    partial class ModifyStudentID
+    partial class StudentsContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +22,7 @@ namespace wepAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("wepAPI.Entities.Course", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Course", b =>
                 {
                     b.Property<string>("CourseCode")
                         .HasColumnType("nvarchar(450)");
@@ -37,8 +35,8 @@ namespace wepAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StudentID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("StudentID")
+                        .HasColumnType("int");
 
                     b.HasKey("CourseCode");
 
@@ -47,7 +45,7 @@ namespace wepAPI.Migrations
                     b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("wepAPI.Entities.Department", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Department", b =>
                 {
                     b.Property<string>("DepartmentCode")
                         .HasColumnType("nvarchar(450)");
@@ -65,11 +63,13 @@ namespace wepAPI.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("wepAPI.Entities.Student", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
                 {
-                    b.Property<Guid>("StudentID")
+                    b.Property<int>("StudentID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
                     b.Property<string>("DepartmentCode")
                         .IsRequired()
@@ -89,16 +89,16 @@ namespace wepAPI.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("wepAPI.Entities.Course", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Course", b =>
                 {
-                    b.HasOne("wepAPI.Entities.Student", null)
+                    b.HasOne("UniversityAPI.Entities.Student", null)
                         .WithMany("RegisteredCourses")
                         .HasForeignKey("StudentID");
                 });
 
-            modelBuilder.Entity("wepAPI.Entities.Student", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
                 {
-                    b.HasOne("wepAPI.Entities.Department", "Department")
+                    b.HasOne("UniversityAPI.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentCode")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -107,7 +107,7 @@ namespace wepAPI.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("wepAPI.Entities.Student", b =>
+            modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
                 {
                     b.Navigation("RegisteredCourses");
                 });
