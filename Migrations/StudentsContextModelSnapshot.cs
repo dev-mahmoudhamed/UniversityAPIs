@@ -45,24 +45,6 @@ namespace UniversityAPI.Migrations
                     b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("UniversityAPI.Entities.Department", b =>
-                {
-                    b.Property<string>("DepartmentCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DepartmentHead")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DepartmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DepartmentCode");
-
-                    b.ToTable("Department");
-                });
-
             modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
                 {
                     b.Property<int>("StudentID")
@@ -71,9 +53,9 @@ namespace UniversityAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
-                    b.Property<string>("DepartmentCode1")
+                    b.Property<string>("DepartmentCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("GPA")
                         .HasColumnType("real");
@@ -84,8 +66,6 @@ namespace UniversityAPI.Migrations
 
                     b.HasKey("StudentID");
 
-                    b.HasIndex("DepartmentCode1");
-
                     b.ToTable("Students");
                 });
 
@@ -94,17 +74,6 @@ namespace UniversityAPI.Migrations
                     b.HasOne("UniversityAPI.Entities.Student", null)
                         .WithMany("RegisteredCourses")
                         .HasForeignKey("StudentID");
-                });
-
-            modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
-                {
-                    b.HasOne("UniversityAPI.Entities.Department", "DepartmentCode")
-                        .WithMany()
-                        .HasForeignKey("DepartmentCode1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DepartmentCode");
                 });
 
             modelBuilder.Entity("UniversityAPI.Entities.Student", b =>

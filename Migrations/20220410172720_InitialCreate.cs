@@ -4,23 +4,10 @@
 
 namespace UniversityAPI.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Department",
-                columns: table => new
-                {
-                    DepartmentCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentHead = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Department", x => x.DepartmentCode);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
@@ -29,17 +16,11 @@ namespace UniversityAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GPA = table.Column<float>(type: "real", nullable: false),
-                    DepartmentCode1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DepartmentCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.StudentID);
-                    table.ForeignKey(
-                        name: "FK_Students_Department_DepartmentCode1",
-                        column: x => x.DepartmentCode1,
-                        principalTable: "Department",
-                        principalColumn: "DepartmentCode",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,11 +46,6 @@ namespace UniversityAPI.Migrations
                 name: "IX_Course_StudentID",
                 table: "Course",
                 column: "StudentID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_DepartmentCode1",
-                table: "Students",
-                column: "DepartmentCode1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -79,9 +55,6 @@ namespace UniversityAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Students");
-
-            migrationBuilder.DropTable(
-                name: "Department");
         }
     }
 }
