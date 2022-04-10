@@ -29,14 +29,14 @@ namespace UniversityAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GPA = table.Column<float>(type: "real", nullable: false),
-                    DepartmentCode = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DepartmentCode1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.StudentID);
                     table.ForeignKey(
-                        name: "FK_Students_Department_DepartmentCode",
-                        column: x => x.DepartmentCode,
+                        name: "FK_Students_Department_DepartmentCode1",
+                        column: x => x.DepartmentCode1,
                         principalTable: "Department",
                         principalColumn: "DepartmentCode",
                         onDelete: ReferentialAction.Cascade);
@@ -67,9 +67,9 @@ namespace UniversityAPI.Migrations
                 column: "StudentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_DepartmentCode",
+                name: "IX_Students_DepartmentCode1",
                 table: "Students",
-                column: "DepartmentCode");
+                column: "DepartmentCode1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

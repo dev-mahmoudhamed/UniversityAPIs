@@ -71,7 +71,7 @@ namespace UniversityAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
-                    b.Property<string>("DepartmentCode")
+                    b.Property<string>("DepartmentCode1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -84,7 +84,7 @@ namespace UniversityAPI.Migrations
 
                     b.HasKey("StudentID");
 
-                    b.HasIndex("DepartmentCode");
+                    b.HasIndex("DepartmentCode1");
 
                     b.ToTable("Students");
                 });
@@ -98,13 +98,13 @@ namespace UniversityAPI.Migrations
 
             modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
                 {
-                    b.HasOne("UniversityAPI.Entities.Department", "Department")
+                    b.HasOne("UniversityAPI.Entities.Department", "DepartmentCode")
                         .WithMany()
-                        .HasForeignKey("DepartmentCode")
+                        .HasForeignKey("DepartmentCode1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.Navigation("DepartmentCode");
                 });
 
             modelBuilder.Entity("UniversityAPI.Entities.Student", b =>
