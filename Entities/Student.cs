@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UniversityAPI.Entities
 {
@@ -9,6 +10,7 @@ namespace UniversityAPI.Entities
         public string StudentName { get; set; }
         public float GPA { get; set; }
         public string DepartmentCode { get; set; }
+        [NotMapped]
         public IEnumerable<Course> RegisteredCourses { get; set; }
 
     }
