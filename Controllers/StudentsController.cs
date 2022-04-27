@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UniversityAPI.Data;
 using UniversityAPI.Entities;
 
@@ -6,10 +7,10 @@ namespace wepAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StudentController : ControllerBase
+    public class StudentsController : ControllerBase
     {
         private readonly StudentsContext _Context;
-        public StudentController(StudentsContext context)
+        public StudentsController(StudentsContext context)
         {
             _Context = context;
         }

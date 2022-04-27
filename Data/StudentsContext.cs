@@ -9,7 +9,7 @@ namespace UniversityAPI.Data
         {
         }
 
-        // Include properties of type DbSet<T> representing tables in the database.
+        // Include properties of type DbSet<T> representing TABLE in the database.
         public DbSet<Student> Students { get; set; }
     }
 }
