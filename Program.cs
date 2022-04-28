@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using UniversityAPI.Data;
 using UniversityAPI.Extensions;
 using NLog;
-
+using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -13,8 +12,13 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 
-string connectionString = builder.Configuration.GetConnectionString("UniversityDatabase");
-builder.Services.AddDbContext<StudentsContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<RepositoryContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("UniversityDatabase"),
+            b => b.MigrationsAssembly("UniversityAPI"));
+
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
