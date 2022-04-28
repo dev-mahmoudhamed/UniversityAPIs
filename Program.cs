@@ -2,12 +2,16 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using UniversityAPI.Data;
 using UniversityAPI.Extensions;
+using NLog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
+builder.Services.ConfigureLoggerService();
 
 string connectionString = builder.Configuration.GetConnectionString("UniversityDatabase");
 builder.Services.AddDbContext<StudentsContext>(options => options.UseSqlServer(connectionString));
