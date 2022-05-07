@@ -8,5 +8,8 @@ namespace Repository
         public StudentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Student> GetAllStudents(bool trackChanges) =>
+        FindAll(trackChanges).OrderBy(std => std.StudentName).ToList();
     }
 }

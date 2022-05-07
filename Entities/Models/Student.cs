@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
@@ -12,8 +11,6 @@ namespace Entities.Models
         public string StudentName { get; set; }
         public float GPA { get; set; }
 
-        [ForeignKey("DepartmentCode")]
-        public Department Department { get; set; }
         public string DepartmentCode { get; set; }
         public IEnumerable<Course> RegisteredCourses { get; set; }
     }

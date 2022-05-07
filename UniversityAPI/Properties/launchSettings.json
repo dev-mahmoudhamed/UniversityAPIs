@@ -12,8 +12,8 @@
     "wepAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "Students",
+      "launchBrowser": false,
+      "launchUrl": "api/students",
       "applicationUrl": "https://localhost:7003;http://localhost:5003",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
