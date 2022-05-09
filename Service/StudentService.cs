@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -8,26 +9,22 @@ namespace Service
     {
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
-        public StudentService(IRepositoryManager repository, ILoggerManager logger)
+        private readonly IMapper _mapper;
+
+        public StudentService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public IEnumerable<StudentDto> GetAllStudents(bool trackChanges)
+        public IEnumerable<StudentDTO> GetAllStudents(bool trackChanges)
         {
-            try
-            {
+            
                 var students = _repository.Student.GetAllStudents(trackChanges);
-                var studentsDto = students.Select(std => 
-                    new StudentDto (std.StudentID, std.StudentName, std.GPA, std.DepartmentCode)).ToList();
-                return studentsDto;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(GetAllStudents)} service method { ex}");
-                throw;
-            }
+                var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+                return studentsDTO;
+            
         }
     }
 }

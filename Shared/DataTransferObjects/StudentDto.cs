@@ -1,6 +1,12 @@
 ﻿
 namespace Shared.DataTransferObjects
 {
-    public record StudentDto (Guid id, string Name, float GPA, string DepartmentCode);
+    public class StudentDTO
+    {
+        public Guid id { get; set; }
+        public string Name { get; set; }
+        public float GPA { get; set; }
+        public string DepartmentCode { get; set; }
 
+    }
 }

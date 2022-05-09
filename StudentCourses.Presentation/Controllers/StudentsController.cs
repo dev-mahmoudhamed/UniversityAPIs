@@ -13,15 +13,9 @@ namespace StudentCourses.Presentation.Controllers
         [HttpGet]
         public IActionResult GetStudents()
         {
-            try
-            {
-                var students = _service.StudentService.GetAllStudents(trackChanges: false);
-                return Ok(students);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
+           // throw new Exception("Exception");
+            var students = _service.StudentService.GetAllStudents(trackChanges: false);
+            return Ok(students);
         }
     }
 }

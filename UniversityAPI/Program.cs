@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using UniversityAPI.Extensions;
 using NLog;
 using Repository;
+using Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -15,8 +16,7 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddControllers().AddApplicationPart(typeof(StudentCourses.Presentation.AssemblyReference).Assembly);
-
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -27,16 +27,12 @@ builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
-}
-else
-{
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
+if (app.Environment.IsProduction())
     app.UseHsts();
-}
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseForwardedHeaders(new ForwardedHeadersOptions
