@@ -11,5 +11,8 @@ namespace Repository
 
         public IEnumerable<Student> GetAllStudents(bool trackChanges) =>
         FindAll(trackChanges).OrderBy(std => std.StudentName).ToList();
+
+        public Student GetStudent(Guid studentId, bool trackChanges) =>
+            FindByCondition(std => std.StudentID.Equals(studentId), trackChanges).SingleOrDefault();
     }
 }

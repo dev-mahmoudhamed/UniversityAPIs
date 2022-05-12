@@ -17,5 +17,12 @@ namespace StudentCourses.Presentation.Controllers
             var students = _service.StudentService.GetAllStudents(trackChanges: false);
             return Ok(students);
         }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetStudent(Guid id)
+        {
+            var student = _service.StudentService.GetStudent(id, trackChanges : false);
+            return Ok(student);
+        }
     }
 }

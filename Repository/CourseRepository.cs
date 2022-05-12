@@ -8,5 +8,6 @@ namespace Repository
         public CourseRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
     }
 }
