@@ -7,5 +7,6 @@ namespace Service.Contracts
         IEnumerable<StudentDTO> GetAllStudents(bool trackChanges);
         StudentDTO GetStudent(Guid studentId, bool trackChanges);
 
+        StudentDTO CreateStudent(StudentDTO student);
     }
 }

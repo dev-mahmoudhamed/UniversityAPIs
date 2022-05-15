@@ -15,5 +15,7 @@ namespace Repository
         public Department GetDepartment(string DepartmentCode, bool trackChanges) =>
             FindByCondition(d => d.DepartmentCode.Equals(DepartmentCode), trackChanges)
             .SingleOrDefault();
-     }
+
+        public void CreateDepartment(Department department) => Create(department);
+    }
 }

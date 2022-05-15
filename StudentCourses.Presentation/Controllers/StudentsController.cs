@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace StudentCourses.Presentation.Controllers
 {
@@ -23,6 +24,13 @@ namespace StudentCourses.Presentation.Controllers
         {
             var student = _service.StudentService.GetStudent(id, trackChanges : false);
             return Ok(student);
+        }
+
+        [HttpPost] 
+        public IActionResult CreateStudent(StudentDTO student)
+        {
+            var createdStudent = _service.StudentService.CreateStudent(student);
+            return Ok(createdStudent);
         }
     }
 }

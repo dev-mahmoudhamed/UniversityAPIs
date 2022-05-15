@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -17,6 +18,15 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public StudentDTO CreateStudent(StudentDTO student)
+        {
+            var studentEntity = _mapper.Map<Student>(student);
+            _repository.Student.createStudent(studentEntity);
+            _repository.Save();
+            var studentToReturn = _mapper.Map<StudentDTO>(studentEntity);
+            return studentToReturn;
         }
 
         public IEnumerable<StudentDTO> GetAllStudents(bool trackChanges)

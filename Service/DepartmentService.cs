@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -34,6 +35,13 @@ namespace Service
             return departmentDto;
         }
 
-
+        public DepartmentDTO CreateDepartment(DepartmentDTO department)
+        {
+            var departmentEntity = _mapper.Map<Department>(department);
+            _repository.Department.CreateDepartment(departmentEntity);
+            _repository.Save();
+            var departmentToReturn = _mapper.Map<DepartmentDTO>(departmentEntity);
+            return departmentToReturn;
+        }
     }
 }

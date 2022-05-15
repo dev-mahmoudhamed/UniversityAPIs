@@ -6,5 +6,6 @@ namespace Contracts
     {
         IEnumerable<Student> GetAllStudents(bool trackChanges);
         Student GetStudent(Guid studentId, bool trackChanges);
+        void createStudent (Student student);
     }
 }

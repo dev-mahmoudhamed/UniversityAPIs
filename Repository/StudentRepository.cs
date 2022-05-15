@@ -9,6 +9,8 @@ namespace Repository
         {
         }
 
+        public void createStudent(Student student) => Create(student);
+
         public IEnumerable<Student> GetAllStudents(bool trackChanges) =>
         FindAll(trackChanges).OrderBy(std => std.StudentName).ToList();
 

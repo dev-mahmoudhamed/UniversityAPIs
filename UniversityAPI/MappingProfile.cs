@@ -13,7 +13,7 @@ namespace UniversityAPI
                 .ForMember(dist => dist.Name, opt => opt.MapFrom(src => src.StudentName))
                 .ReverseMap();
 
-            CreateMap<Department, DepartmentDTO>();
+            CreateMap<Department, DepartmentDTO>().ReverseMap();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObjects;
 
 namespace StudentCourses.Presentation_.Controllers
 {
@@ -23,6 +24,17 @@ namespace StudentCourses.Presentation_.Controllers
         {
             var department = _service.DepartmentService.GetDepartment(departmentCode, trackChanges: false);
             return Ok(department);
+        }
+
+        [HttpPost]
+        public IActionResult CreateDepartment(DepartmentDTO department)
+        {
+            if (department is null)
+                return BadRequest("DepartmentDTO object is null");
+
+             var createdDepartment = _service.DepartmentService.CreateDepartment(department);
+
+            return Ok(createdDepartment);
         }
     }
 }

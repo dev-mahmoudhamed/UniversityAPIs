@@ -8,5 +8,7 @@ namespace Service.Contracts
         IEnumerable<DepartmentDTO> GetDepartments(bool trackChanges);
         DepartmentDTO GetDepartment(string departmentCode, bool trackChanges);
 
+        DepartmentDTO CreateDepartment (DepartmentDTO department);
+
     }
 }
