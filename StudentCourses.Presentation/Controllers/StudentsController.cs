@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace StudentCourses.Presentation.Controllers
 {
@@ -12,10 +13,10 @@ namespace StudentCourses.Presentation.Controllers
         public StudentsController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetStudents()
+        public IActionResult GetStudents([FromQuery] StudentParameters stdParams)
         {
             // throw new Exception("Exception");
-            var students = _service.StudentService.GetAllStudents(trackChanges: false);
+            var students = _service.StudentService.GetAllStudents( stdParams,trackChanges: false);
             return Ok(students);
         }
 

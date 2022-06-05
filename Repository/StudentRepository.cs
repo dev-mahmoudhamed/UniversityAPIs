@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Shared.RequestFeatures;
 
 namespace Repository
 {
@@ -13,8 +14,11 @@ namespace Repository
 
         public void DeleteStudent(Student student) => Delete(student);
 
-        public IEnumerable<Student> GetAllStudents(bool trackChanges) =>
-        FindAll(trackChanges).OrderBy(std => std.StudentName).ToList();
+        public IEnumerable<Student> GetAllStudents(StudentParameters stdParams, bool trackChanges) =>
+        FindAll(trackChanges).OrderBy(std => std.StudentName)
+            .Skip((stdParams.PageNumber -1) * stdParams.PageSize)
+            .Take(stdParams.PageSize)
+            .ToList();
 
         public Student GetStudent(Guid studentId, bool trackChanges) =>
             FindByCondition(std => std.StudentID.Equals(studentId), trackChanges).SingleOrDefault();

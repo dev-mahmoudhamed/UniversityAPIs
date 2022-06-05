@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace Service
 {
@@ -36,10 +37,10 @@ namespace Service
             _repository.SaveAsync();
         }
 
-        public IEnumerable<StudentDTO> GetAllStudents(bool trackChanges)
+        public IEnumerable<StudentDTO> GetAllStudents(StudentParameters stdParams, bool trackChanges)
         {
 
-            var students = _repository.Student.GetAllStudents(trackChanges);
+            var students = _repository.Student.GetAllStudents(stdParams, trackChanges);
             var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
             return studentsDTO;
 
