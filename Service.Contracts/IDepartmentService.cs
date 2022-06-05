@@ -5,10 +5,11 @@ namespace Service.Contracts
 {
     public interface IDepartmentService
     {
-        IEnumerable<DepartmentDTO> GetDepartments(bool trackChanges);
-        DepartmentDTO GetDepartment(string departmentCode, bool trackChanges);
-
-        DepartmentDTO CreateDepartment (DepartmentDTO department);
+        Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync(bool trackChanges);
+        Task<DepartmentDTO> GetDepartmentAsync(string departmentCode, bool trackChanges);
+        Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department);
+        Task DeleteDepartmentAsync(string departmentId, bool trackChanges);
+        Task UpdateDepartmentAsync(string departmentId, DepartmentDTO newDepartment, bool trackChanges);
 
     }
 }

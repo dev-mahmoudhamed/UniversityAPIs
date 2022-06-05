@@ -24,9 +24,16 @@ namespace Service
         {
             var studentEntity = _mapper.Map<Student>(student);
             _repository.Student.createStudent(studentEntity);
-            _repository.Save();
+            _repository.SaveAsync();
             var studentToReturn = _mapper.Map<StudentDTO>(studentEntity);
             return studentToReturn;
+        }
+
+        public void DeleteStudent(Guid studentId, bool trackChanges)
+        {
+            var student = _repository.Student.GetStudent(studentId, trackChanges);
+            _repository.Student.DeleteStudent(student);
+            _repository.SaveAsync();
         }
 
         public IEnumerable<StudentDTO> GetAllStudents(bool trackChanges)
@@ -47,6 +54,13 @@ namespace Service
             }
             var studentDto = _mapper.Map<StudentDTO>(student);
             return studentDto;
+        }
+
+        public void UpdateStudent(Guid id, StudentDTO studentForUpdate, bool TrackChanges)
+        {
+            var oldStudent = _repository.Student.GetStudent(id, TrackChanges);
+            _mapper.Map(studentForUpdate, oldStudent);
+            _repository.SaveAsync();
         }
     }
 }

@@ -19,15 +19,15 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
         }
-        public IEnumerable<DepartmentDTO> GetDepartments(bool trackChanges)
+        public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync(bool trackChanges)
         {
-            var departments = _repository.Department.GetDepartments(trackChanges);            
+            var departments = await _repository.Department.GetDepartmentsAsync(trackChanges);
             var departmentsDto = _mapper.Map<IEnumerable<DepartmentDTO>>(departments);
             return departmentsDto;
         }
-        public DepartmentDTO GetDepartment(string departmentCode, bool trackChanges)
+        public async Task<DepartmentDTO> GetDepartmentAsync(string departmentCode, bool trackChanges)
         {
-            var department = _repository.Department.GetDepartment(departmentCode, trackChanges);
+            var department = await _repository.Department.GetDepartmentAsync(departmentCode, trackChanges);
             if (department == null)
                 throw new DepartmentNotFoundException(departmentCode);
 
@@ -35,13 +35,30 @@ namespace Service
             return departmentDto;
         }
 
-        public DepartmentDTO CreateDepartment(DepartmentDTO department)
+        public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
         {
             var departmentEntity = _mapper.Map<Department>(department);
             _repository.Department.CreateDepartment(departmentEntity);
-            _repository.Save();
+           await _repository.SaveAsync();
             var departmentToReturn = _mapper.Map<DepartmentDTO>(departmentEntity);
             return departmentToReturn;
+        }
+
+        public async Task DeleteDepartmentAsync(string departmentId, bool trackChanges)
+        {
+            var department = await _repository.Department.GetDepartmentAsync(departmentId, trackChanges);
+            _repository.Department.DeleteDepartment(department);
+            await _repository.SaveAsync();
+        }
+
+        public async Task UpdateDepartmentAsync(string departmentId, DepartmentDTO newDepartment, bool trackChanges)
+        {
+            var departmentEntity = await _repository.Department.GetDepartmentAsync(departmentId, trackChanges);
+            if (departmentEntity is null)
+                throw new DepartmentNotFoundException(departmentId);
+
+            _mapper.Map(newDepartment, departmentEntity);
+            await _repository.SaveAsync();
         }
     }
 }

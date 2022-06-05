@@ -13,28 +13,38 @@ namespace StudentCourses.Presentation_.Controllers
         public DepartmentsController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetDepartments()
+        public async Task<IActionResult> GetDepartments()
         {
-            var departments = _service.DepartmentService.GetDepartments(trackChanges: false);
+            var departments =await _service.DepartmentService.GetDepartmentsAsync(trackChanges: false);
             return Ok(departments);
         }
 
         [HttpGet("{departmentCode}")]
-        public IActionResult GetEmployeeForCompany(string departmentCode)
+        public async Task<IActionResult> GetEmployeeForCompany(string departmentCode)
         {
-            var department = _service.DepartmentService.GetDepartment(departmentCode, trackChanges: false);
+            var department = await _service.DepartmentService.GetDepartmentAsync(departmentCode, trackChanges: false);
             return Ok(department);
         }
 
         [HttpPost]
-        public IActionResult CreateDepartment(DepartmentDTO department)
+        public async Task<IActionResult> CreateDepartment(DepartmentDTO department)
         {
-            if (department is null)
-                return BadRequest("DepartmentDTO object is null");
+            var createdDepartment =await _service.DepartmentService.CreateDepartmentAsync(department);
+             return Ok(createdDepartment);
+        }
 
-             var createdDepartment = _service.DepartmentService.CreateDepartment(department);
+        [HttpPut("{departmentCode}")]
+        public async Task<IActionResult> UpdateDepartment(string departmentCode, DepartmentDTO department)
+        {
+            await _service.DepartmentService.UpdateDepartmentAsync(departmentCode, department, trackChanges: true);
+            return NoContent();
+        }
 
-            return Ok(createdDepartment);
+        [HttpDelete()]
+        public async Task<IActionResult> DeleteDepartment(string departmentCode)
+        {
+            await _service.DepartmentService.DeleteDepartmentAsync(departmentCode, trackChanges: false);
+            return NoContent();
         }
     }
 }

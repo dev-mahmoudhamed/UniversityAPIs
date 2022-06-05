@@ -5,9 +5,11 @@ namespace Contracts
 {
     public interface IDepartmentRepository
     {
-        IEnumerable<Department> GetDepartments(bool trackChanges);
+       Task<IEnumerable<Department>> GetDepartmentsAsync(bool trackChanges);
 
-        Department GetDepartment(string DepartmentCode, bool trackChanges);
+        Task<Department> GetDepartmentAsync(string departmentCode, bool trackChanges);
         void CreateDepartment(Department department);
+
+        void DeleteDepartment(Department department);
     }
 }

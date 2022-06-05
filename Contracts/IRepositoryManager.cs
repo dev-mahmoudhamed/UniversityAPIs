@@ -6,6 +6,6 @@ namespace Contracts
         ICourseRepository Course { get; }
         IStudentRepository Student { get; }
         IDepartmentRepository Department { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

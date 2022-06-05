@@ -7,6 +7,5 @@ namespace Shared.DataTransferObjects
         public string DepartmentCode { get; set; }
         public string DepartmentName { get; set; }
         public string DepartmentHead { get; set; }
-
     }
 }

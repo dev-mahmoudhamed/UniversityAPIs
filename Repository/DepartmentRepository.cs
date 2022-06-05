@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -8,14 +9,15 @@ namespace Repository
         public DepartmentRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
-        public IEnumerable<Department> GetDepartments(bool trackChanges) => FindAll(trackChanges).ToList();
+        public async Task<IEnumerable<Department>> GetDepartmentsAsync(bool trackChanges) =>
+            await FindAll(trackChanges).ToListAsync();
 
-
-
-        public Department GetDepartment(string DepartmentCode, bool trackChanges) =>
-            FindByCondition(d => d.DepartmentCode.Equals(DepartmentCode), trackChanges)
-            .SingleOrDefault();
+        public async Task<Department> GetDepartmentAsync(string departmentCode, bool trackChanges) =>
+           await FindByCondition(d => d.DepartmentCode.Equals(departmentCode), trackChanges)
+            .SingleOrDefaultAsync();
 
         public void CreateDepartment(Department department) => Create(department);
+
+        public void DeleteDepartment(Department department) => Delete(department);
     }
 }
