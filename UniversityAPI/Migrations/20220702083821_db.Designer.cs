@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace UniversityAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220702083821_db")]
+    partial class db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,15 +196,15 @@ namespace UniversityAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4e5dbf83-67eb-40f2-986b-0e03e2da1cff",
-                            ConcurrencyStamp = "5e26a99e-f3ef-4b69-879f-3d0b0cf15a45",
+                            Id = "7b85396d-bc0c-45ef-9a64-54a5ba391eae",
+                            ConcurrencyStamp = "fb4d5db0-1021-4274-8cf8-c9e91bcec430",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "759b1448-8154-4703-9a75-ee025ac10b20",
-                            ConcurrencyStamp = "a2ed1660-a41e-4b1c-9aa7-09b0359b0a2f",
+                            Id = "63f365d4-c04e-4ae9-ac68-afce137c1257",
+                            ConcurrencyStamp = "36060d9c-aa8b-45cd-b575-c3249052df2d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

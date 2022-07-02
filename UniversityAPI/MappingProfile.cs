@@ -15,6 +15,7 @@ namespace UniversityAPI
 
             CreateMap<Department, DepartmentDTO>().ReverseMap();
             CreateMap<UserForRegistrationDto, User>();
+            CreateMap<Course, CourseDTO>().ReverseMap();
 
         }
     }

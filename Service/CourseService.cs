@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Contracts;
-using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -18,6 +17,12 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
 
+        }
+        public IEnumerable<CourseDTO> GetCourses(bool trackChanges)
+        {
+            var courses = _repository.Course.GetCourses(trackChanges);
+            var coursesDto = _mapper.Map<IEnumerable<CourseDTO>>(courses);
+            return coursesDto;
         }
     }
 }

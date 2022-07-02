@@ -8,6 +8,7 @@ namespace Repository
         public CourseRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
-
+        public IEnumerable<Course> GetCourses(bool trackChanges) => FindAll(trackChanges).ToList();
+     
     }
 }
