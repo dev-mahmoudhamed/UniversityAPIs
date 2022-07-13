@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -13,6 +14,8 @@ namespace StudentCourses.Presentation_.Controllers
         public DepartmentsController(IServiceManager service) => _service = service;
 
         [HttpGet]
+        [Authorize]
+
         public async Task<IActionResult> GetDepartments()
         {
             var departments =await _service.DepartmentService.GetDepartmentsAsync(trackChanges: false);
